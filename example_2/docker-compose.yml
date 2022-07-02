@@ -1,0 +1,21 @@
+ version: "2.4"
+ 
+ services:
+    webhost:
+     image: saimonphoenix/k8sphp
+     container_name: Hello_Seven_Winds_Studio
+     ports:
+       - 8888:80
+     restart: always
+     volumes:
+          #copy index html from this foled into container   
+        - ./html:/var/www/html
+          #copy conf file from this folder into container
+        - ./docker_nginx_conf:/etc/nginx/conf.d
+          #create folder in container and mapping with folder on proxy server
+        - ./backup_container:/backup
+  
+   
+
+
+

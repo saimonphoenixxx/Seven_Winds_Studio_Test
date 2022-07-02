@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BDIR=/home/freekaloid/backup
+BDATE=$(date +'%d.%m.%Y_%H.%M')
+FILENAME=$BDIR/$(hostname)_$BDATE
+
+tar -czvf $FILENAME.conf.tar.gz  /etc/nginx/nginx.conf &> $FILENAME.conf.log

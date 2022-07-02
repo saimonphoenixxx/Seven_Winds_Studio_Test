@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#start container with settings
+docker-compose up -d 
+
+#cp on proxy server nginx conf file into nginx
+sudo cp ./nginx.conf /etc/nginx/
+#restart nginx for renew settings
+sudo service nginx restart
+#update and install nano and cron into container with site
+docker exec -it Hello_Seven_Winds_Studio apt-get update 
+docker exec -it Hello_Seven_Winds_Studio apt-get install nano -y
+docker exec -it Hello_Seven_Winds_Studio apt-get install cron -y
+docker exec -it Hello_Seven_Winds_Studio service cron restart
+#Copy backup script fron container into cron.daily
+docker container cp ./script_backup_container Hello_Seven_Winds_Studio:/etc/cron.daily
+
+
+

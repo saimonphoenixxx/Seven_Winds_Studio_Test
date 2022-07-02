@@ -1,0 +1,11 @@
+#!/bin/bash
+
+BDIR=/backup
+BDATE=$(date +'%d.%m.%Y_%H.%M')
+FILENAME=$BDIR/$(hostname)_$BDATE
+
+#remove backup files older than 5 days
+find /backup/ -mtime +4 -delete 
+#create backup files index.html and conf file site into "/backup" on container
+tar -czvf $FILENAME.conf.tar.gz -C /etc/nginx/conf.d . &> $FILENAME.conf.log
+tar -czvf $FILENAME.html.tar.gz  /var/www//html . &> $FILENAME.html.log
